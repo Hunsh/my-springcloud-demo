@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: route_provider # 题目微服务路由规则
+          uri: lb://provider # 负载均衡，将请求转发到注册中心注册的assjava-thirdparty服务
+          predicates: # 断言
+            - Path=/api/provider/** # 如果前端请求路径包含 api/thirdparty，则应用这条路由规则
+          filters: #过滤器
+            - RewritePath=/api/provider/(?<segment>.*),/$\{segment} # 将跳转路径中包含的api替换成空
+
+        - id: route_consumer # 题目微服务路由规则
+          uri: lb://consumer # 负载均衡，将请求转发到注册中心注册的assjava-question服务
+          predicates: # 断言
+            - Path=/api/consumer/** # 如果前端请求路径包含 api/question，则应用这条路由规则
+          filters: #过滤器
+            - RewritePath=/api/consumer/(?<segment>.*),/$\{segment} # 将跳转路径中包含的api替换成空
