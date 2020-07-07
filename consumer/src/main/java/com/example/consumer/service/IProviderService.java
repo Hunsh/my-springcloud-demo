@@ -16,4 +16,5 @@ public interface IProviderService {
 
     @RequestMapping(value = "/getProvider", method = RequestMethod.GET)
     String getProvider();
+
 }
