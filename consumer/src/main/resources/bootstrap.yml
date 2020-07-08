@@ -3,6 +3,12 @@ server:
 spring:
   application:
     name: consumer
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch
+      cluster-nodes: ${REGISTER_HOST:localhost}:${REGISTER_PORT:9300}
+      repositories:
+        enabled: true
   redis:
     host: ${REDIS_HOST:localhost}
     port: ${REDIS_PORT:6379}
